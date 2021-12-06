@@ -1,0 +1,41 @@
+﻿<mah:MetroWindow 
+    x:Class="Loteria.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    Title="Resultados de Lotería" Height="600" Width="600"
+    WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ItemsControl ItemsSource="{Binding}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <GroupBox Margin="10">
+                        <GroupBox.Header>
+                            <TextBlock Foreground="{DynamicResource MahApps.Brushes.DataGrid.Selection.Text}">
+                            <Run Text="{Binding Nombre, Mode=OneWay}"/>
+                            <Run Text="{Binding Fecha, Mode=OneWay}"/>
+                            </TextBlock>
+                        </GroupBox.Header>
+                        <ItemsControl ItemsSource="{Binding Numeros}" x:Name="Parent">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                                        Background="{Binding DataContext.Color, ElementName=Parent}"
+                                        Content="{Binding}" Height="50" Width="50" Margin="10"
+                                        FontSize="20"
+                                        Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </GroupBox>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <mah:ProgressRing IsLarge="True" x:Name="ProgressRing"/>
+    </Grid>
+</mah:MetroWindow>
